@@ -1,4 +1,3 @@
-// DOM Elements
 const uploadArea = document.getElementById('uploadArea');
 const fileInput = document.getElementById('fileInput');
 const imagePreview = document.getElementById('imagePreview');
@@ -11,196 +10,91 @@ const errorCard = document.getElementById('errorCard');
 
 let selectedFile = null;
 
-// Upload area click
-uploadArea.addEventListener('click', () => {
-    fileInput.click();
-});
+// Upload click
+uploadArea.onclick = () => fileInput.click();
 
-// Drag and drop
-uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    uploadArea.classList.add('dragover');
-});
+// File select
+fileInput.onchange = e => handleFile(e.target.files[0]);
 
-uploadArea.addEventListener('dragleave', () => {
-    uploadArea.classList.remove('dragover');
-});
-
-uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    uploadArea.classList.remove('dragover');
-    
-    const files = e. dataTransfer.files;
-    if (files.length > 0) {
-        handleFile(files[0]);
-    }
-});
-
-// File input change
-fileInput.addEventListener('change', (e) => {
-    if (e.target.files.length > 0) {
-        handleFile(e.target.files[0]);
-    }
-});
-
-// Remove image
-removeImage.addEventListener('click', () => {
+removeImage.onclick = () => {
     selectedFile = null;
     fileInput.value = '';
     uploadArea.classList.remove('d-none');
     imagePreview.classList.add('d-none');
     extractBtn.disabled = true;
     resultsCard.classList.add('d-none');
-    errorCard.classList.add('d-none');
-});
+};
 
-// Extract button
-extractBtn.addEventListener('click', extractMedicine);
-
-// Handle file selection
+// Handle file
 function handleFile(file) {
-    // Validate file type
-    const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/bmp', 'image/webp'];
-    
-    if (!allowedTypes.includes(file.type)) {
-        showError('Invalid file type. Please upload an image.');
-        return;
-    }
-    
-    // Validate file size (16MB)
-    if (file.size > 16 * 1024 * 1024) {
-        showError('File too large. Maximum size is 16MB.');
-        return;
-    }
-    
     selectedFile = file;
-    
-    // Show preview
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        previewImg.src = e.target.result;
-        uploadArea.classList.add('d-none');
-        imagePreview.classList.remove('d-none');
-        extractBtn. disabled = false;
-    };
-    reader.readAsDataURL(file);
-    
-    // Hide previous results
-    resultsCard.classList.add('d-none');
-    errorCard.classList.add('d-none');
+    previewImg.src = URL.createObjectURL(file);
+    uploadArea.classList.add('d-none');
+    imagePreview.classList.remove('d-none');
+    extractBtn.disabled = false;
 }
 
-// Extract medicine name
-async function extractMedicine() {
-    if (!selectedFile) return;
-    
-    // Show loading
-    extractBtn.disabled = true;
+// Extract
+extractBtn.onclick = async () => {
     loadingSpinner.classList.remove('d-none');
-    resultsCard.classList.add('d-none');
-    errorCard.classList.add('d-none');
-    
-    // Create form data
+    extractBtn.disabled = true;
+
     const formData = new FormData();
     formData.append('file', selectedFile);
-    
+
     try {
-        const response = await fetch('/api/extract', {
-            method: 'POST',
-            body: formData
-        });
-        
-        const data = await response.json();
-        
-        if (data.success) {
-            displayResults(data);
-        } else {
-            showError(data.error || 'An error occurred');
-        }
-    } catch (error) {
-        showError('Network error:  ' + error.message);
-    } finally {
-        loadingSpinner.classList.add('d-none');
-        extractBtn.disabled = false;
+        const res = await fetch('/api/extract', { method: 'POST', body: formData });
+        const data = await res.json();
+        displayResults(data);
+    } catch {
+        showError("Server error");
     }
-}
+
+    loadingSpinner.classList.add('d-none');
+    extractBtn.disabled = false;
+};
 
 // Display results
 function displayResults(data) {
-    // Hide error card
-    errorCard.classList. add('d-none');
-    
-    // Show best match
-    if (data.best_match) {
-        document.getElementById('medicineName').textContent = data.best_match. name;
-        document.getElementById('confidenceBar').style.width = data.best_match.confidence + '%';
-        document.getElementById('confidenceText').textContent = data.best_match.confidence + '%';
-        
-        // Color code confidence
-        const confidenceBar = document.getElementById('confidenceBar');
-        if (data.best_match.confidence >= 70) {
-            confidenceBar. className = 'progress-bar bg-success';
-        } else if (data.best_match.confidence >= 50) {
-            confidenceBar. className = 'progress-bar bg-warning';
-        } else {
-            confidenceBar.className = 'progress-bar bg-danger';
-        }
-    } else {
-        document.getElementById('medicineName').textContent = 'No medicine name detected';
-        document.getElementById('confidenceBar').style.width = '0%';
-        document.getElementById('confidenceText').textContent = '0%';
-    }
-    
-    // Show other candidates
-    const candidatesList = document.getElementById('candidatesList');
-    candidatesList. innerHTML = '';
-    
-    if (data.all_candidates && data.all_candidates.length > 1) {
-        data.all_candidates.slice(1, 5).forEach((candidate, index) => {
-            const item = document.createElement('div');
-            item.className = 'list-group-item';
-            item.innerHTML = `
-                <div class="d-flex justify-content-between align-items-center">
-                    <div>
-                        <strong>${candidate.name}</strong>
-                        <br>
-                        <small class="text-muted">Position: #${candidate.position}</small>
-                    </div>
-                    <span class="badge bg-primary rounded-pill">${candidate.confidence}%</span>
-                </div>
-            `;
-            candidatesList.appendChild(item);
-        });
-    } else {
-        candidatesList.innerHTML = '<div class="list-group-item text-muted">No other candidates</div>';
-    }
-    
-    // Show all detected text
-    const allTextList = document.getElementById('allTextList');
-    allTextList.innerHTML = '';
-    
-    if (data.all_text && data. all_text.length > 0) {
-        data.all_text.forEach((item, index) => {
-            const textItem = document.createElement('div');
-            textItem.className = 'mb-2 pb-2 border-bottom';
-            textItem.innerHTML = `
-                <span class="badge bg-secondary">${index + 1}</span>
-                <strong>${item.text}</strong>
-                <span class="text-muted float-end">${item.confidence}%</span>
-            `;
-            allTextList.appendChild(textItem);
-        });
-    } else {
-        allTextList.innerHTML = '<p class="text-muted mb-0">No text detected</p>';
-    }
-    
-    // Show results card
+    errorCard.classList.add('d-none');
     resultsCard.classList.remove('d-none');
+
+    // Best match
+    document.getElementById('medicineName').innerText =
+        data.best_match ? data.best_match.name : 'Not detected';
+
+    const conf = data.best_match?.confidence || 0;
+    document.getElementById('confidenceBar').style.width = conf + '%';
+    document.getElementById('confidenceText').innerText = conf + '%';
+
+    // Safety details
+    if (data.safety && data.safety.found) {
+        document.getElementById('safetySection').classList.remove('d-none');
+        document.getElementById('safeMedicineName').innerText = data.safety.medicine_name;
+        document.getElementById('medicineLabel').innerText = data.safety.label.toUpperCase();
+        document.getElementById('medicineIngredients').innerText = data.safety.ingredients;
+    } else {
+        document.getElementById('safetySection').classList.add('d-none');
+    }
+
+    // Candidates
+    const cl = document.getElementById('candidatesList');
+    cl.innerHTML = '';
+    (data.all_candidates || []).slice(1, 5).forEach(c => {
+        cl.innerHTML += `<div class="list-group-item">${c.name} (${c.confidence}%)</div>`;
+    });
+
+    // All text
+    const tl = document.getElementById('allTextList');
+    tl.innerHTML = '';
+    (data.all_text || []).forEach(t => {
+        tl.innerHTML += `<div>${t.text} (${t.confidence}%)</div>`;
+    });
 }
 
-// Show error
-function showError(message) {
-    document.getElementById('errorMessage').textContent = message;
+function showError(msg) {
     errorCard.classList.remove('d-none');
     resultsCard.classList.add('d-none');
+    document.getElementById('errorMessage').innerText = msg;
 }
+

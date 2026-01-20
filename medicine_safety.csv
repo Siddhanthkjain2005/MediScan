@@ -1,0 +1,53 @@
+medicine_name,ingredients,label
+Phenacetin,Phenacetin,banned
+Practolol,Practolol,banned
+Nialamide,Nialamide,banned
+Rofecoxib,Rofecoxib,banned
+Valdecoxib,Valdecoxib,banned
+Analgin,Metamizole,banned
+Cisapride,Cisapride,banned
+Sibutramine,Sibutramine,banned
+Thalidomide Combo,Thalidomide combinations,banned
+Vitamin Analgesic,Vitamins + Analgesics,banned
+Penicillin Sulpha,Penicillin + Sulphonamides,banned
+Tetracycline VitC,Tetracycline + Vitamin C,banned
+Chloramphenicol Combo,Chloramphenicol combinations,banned
+Ergot Prep,Crude ergot alkaloids,banned
+Iron Strychnine,Iron + Strychnine,banned
+Yohimbine Combo,Yohimbine + Strychnine,banned
+Codeine Cold,Codeine + Antihistamines,banned
+Antihistamine Diarrheal,Antihistamine + Antidiarrheal,banned
+Vitamin TB,Vitamins + Anti-TB drugs,banned
+Etodolac Para,Etodolac + Paracetamol,banned
+Cetirizine PE,Cetirizine + Phenylephrine,banned
+Levocetirizine PE,Levocetirizine + Phenylephrine,banned
+Naphazoline Combo,Naphazoline + CPM,banned
+Gamma BHC Benzocaine,Lindane + Benzocaine,banned
+Clindamycin Zinc,Clindamycin + Zinc,banned
+Glucosamine Combo,Glucosamine + Diacerein,banned
+Paracetamol,Paracetamol,safe
+Ibuprofen,Ibuprofen,safe
+Aspirin,Acetylsalicylic acid,safe
+Amoxicillin,Amoxicillin,safe
+Azithromycin,Azithromycin,safe
+Ceftriaxone,Ceftriaxone,safe
+Metformin,Metformin,safe
+Insulin Human,Human insulin,safe
+Atorvastatin,Atorvastatin,safe
+Amlodipine,Amlodipine,safe
+Losartan,Losartan,safe
+Levothyroxine,Levothyroxine,safe
+Clopidogrel,Clopidogrel,safe
+Warfarin,Warfarin,safe
+Furosemide,Furosemide,safe
+Spironolactone,Spironolactone,safe
+Hydrochlorothiazide,Hydrochlorothiazide,safe
+Propranolol,Propranolol,safe
+Sertraline,Sertraline,safe
+Fluoxetine,Fluoxetine,safe
+Omeprazole,Omeprazole,safe
+Pantoprazole,Pantoprazole,safe
+Salbutamol,Salbutamol,safe
+Budesonide,Budesonide,safe
+Nitrofurantoin,Nitrofurantoin,safe
+Ciprofloxacin,Ciprofloxacin,safe
