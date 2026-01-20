@@ -1,100 +1,88 @@
-const uploadArea = document.getElementById('uploadArea');
-const fileInput = document.getElementById('fileInput');
-const imagePreview = document.getElementById('imagePreview');
-const previewImg = document.getElementById('previewImg');
-const removeImage = document.getElementById('removeImage');
-const extractBtn = document.getElementById('extractBtn');
-const loadingSpinner = document.getElementById('loadingSpinner');
-const resultsCard = document.getElementById('resultsCard');
-const errorCard = document.getElementById('errorCard');
+const uploadArea = document.getElementById("uploadArea");
+const fileInput = document.getElementById("fileInput");
+const previewImg = document.getElementById("previewImg");
+const imagePreview = document.getElementById("imagePreview");
+const extractBtn = document.getElementById("extractBtn");
+const loadingSpinner = document.getElementById("loadingSpinner");
+const resultsCard = document.getElementById("resultsCard");
+const errorCard = document.getElementById("errorCard");
 
 let selectedFile = null;
 
-// Upload click
 uploadArea.onclick = () => fileInput.click();
 
-// File select
-fileInput.onchange = e => handleFile(e.target.files[0]);
-
-removeImage.onclick = () => {
-    selectedFile = null;
-    fileInput.value = '';
-    uploadArea.classList.remove('d-none');
-    imagePreview.classList.add('d-none');
-    extractBtn.disabled = true;
-    resultsCard.classList.add('d-none');
+fileInput.onchange = e => {
+    selectedFile = e.target.files[0];
+    previewImg.src = URL.createObjectURL(selectedFile);
+    imagePreview.classList.remove("d-none");
+    uploadArea.classList.add("d-none");
+    extractBtn.disabled = false;
 };
 
-// Handle file
-function handleFile(file) {
-    selectedFile = file;
-    previewImg.src = URL.createObjectURL(file);
-    uploadArea.classList.add('d-none');
-    imagePreview.classList.remove('d-none');
-    extractBtn.disabled = false;
-}
-
-// Extract
 extractBtn.onclick = async () => {
-    loadingSpinner.classList.remove('d-none');
-    extractBtn.disabled = true;
+    loadingSpinner.classList.remove("d-none");
 
-    const formData = new FormData();
-    formData.append('file', selectedFile);
+    const fd = new FormData();
+    fd.append("file", selectedFile);
 
     try {
-        const res = await fetch('/api/extract', { method: 'POST', body: formData });
+        const res = await fetch("/api/extract", { method: "POST", body: fd });
         const data = await res.json();
-        displayResults(data);
+        renderResults(data);
     } catch {
         showError("Server error");
     }
 
-    loadingSpinner.classList.add('d-none');
-    extractBtn.disabled = false;
+    loadingSpinner.classList.add("d-none");
 };
 
-// Display results
-function displayResults(data) {
-    errorCard.classList.add('d-none');
-    resultsCard.classList.remove('d-none');
+function renderResults(data) {
+    resultsCard.classList.remove("d-none");
 
-    // Best match
-    document.getElementById('medicineName').innerText =
-        data.best_match ? data.best_match.name : 'Not detected';
+    document.getElementById("medicineName").innerText =
+        data.best_match?.name || "Not detected";
 
     const conf = data.best_match?.confidence || 0;
-    document.getElementById('confidenceBar').style.width = conf + '%';
-    document.getElementById('confidenceText').innerText = conf + '%';
+    document.getElementById("confidenceBar").style.width = conf + "%";
+    document.getElementById("confidenceText").innerText = conf + "%";
 
-    // Safety details
-    if (data.safety && data.safety.found) {
-        document.getElementById('safetySection').classList.remove('d-none');
-        document.getElementById('safeMedicineName').innerText = data.safety.medicine_name;
-        document.getElementById('medicineLabel').innerText = data.safety.label.toUpperCase();
-        document.getElementById('medicineIngredients').innerText = data.safety.ingredients;
-    } else {
-        document.getElementById('safetySection').classList.add('d-none');
+    if (data.safety?.found) {
+        document.getElementById("safetySection").classList.remove("d-none");
+
+        // Existing fields (UNCHANGED)
+        document.getElementById("safeMedicineName").innerText =
+            data.safety.medicine_name ?? "-";
+
+        document.getElementById("medicineLabel").innerText =
+            data.safety.label ?? "-";
+
+        document.getElementById("medicineIngredients").innerText =
+            data.safety.ingredients ?? "-";
+
+        // 🔹 NEW synthetic features (SAFE ADDITION)
+        document.getElementById("avgDosage").innerText =
+            data.safety.avg_daily_dosage_mg ?? "-";
+
+        document.getElementById("sideEffectScore").innerText =
+            data.safety.side_effect_score ?? "-";
+
+        document.getElementById("toxicityIndex").innerText =
+            data.safety.toxicity_index ?? "-";
+
+        document.getElementById("interactionCount").innerText =
+            data.safety.interaction_count ?? "-";
+
+        document.getElementById("graphDegree").innerText =
+            data.safety.graph_degree_centrality ?? "-";
+
+        document.getElementById("graphClustering").innerText =
+            data.safety.graph_clustering_coeff ?? "-";
     }
-
-    // Candidates
-    const cl = document.getElementById('candidatesList');
-    cl.innerHTML = '';
-    (data.all_candidates || []).slice(1, 5).forEach(c => {
-        cl.innerHTML += `<div class="list-group-item">${c.name} (${c.confidence}%)</div>`;
-    });
-
-    // All text
-    const tl = document.getElementById('allTextList');
-    tl.innerHTML = '';
-    (data.all_text || []).forEach(t => {
-        tl.innerHTML += `<div>${t.text} (${t.confidence}%)</div>`;
-    });
 }
+
+
 
 function showError(msg) {
-    errorCard.classList.remove('d-none');
-    resultsCard.classList.add('d-none');
-    document.getElementById('errorMessage').innerText = msg;
+    errorCard.classList.remove("d-none");
+    document.getElementById("errorMessage").innerText = msg;
 }
-

@@ -81,13 +81,45 @@
                     </div>
 
                     <!-- Medicine Safety Details -->
-                    <div id="safetySection" class="alert alert-info d-none mt-3">
-                        <h5><i class="fas fa-notes-medical"></i> Medicine Details</h5>
-                        <hr>
-                        <p><strong>Name:</strong> <span id="safeMedicineName">-</span></p>
-                        <p><strong>Safety Label:</strong> <span id="medicineLabel">-</span></p>
-                        <p><strong>Ingredients:</strong> <span id="medicineIngredients">-</span></p>
-                    </div>
+<div id="safetySection" class="alert alert-info d-none mt-3">
+    <h5><i class="fas fa-notes-medical"></i> Medicine Details</h5>
+    <hr>
+    <p><strong>Name:</strong> <span id="safeMedicineName">-</span></p>
+    <p><strong>Safety Label:</strong> <span id="medicineLabel">-</span></p>
+    <p><strong>Ingredients:</strong> <span id="medicineIngredients">-</span></p>
+
+    <!-- 🔹 NEW: Synthetic Features (ADDED ONLY) -->
+    <hr>
+    <h6><i class="fas fa-chart-line"></i> Risk & Interaction Metrics</h6>
+
+    <ul class="list-group list-group-flush small">
+        <li class="list-group-item">
+            Avg Daily Dosage (mg):
+            <span id="avgDosage">-</span>
+        </li>
+        <li class="list-group-item">
+            Side Effect Score:
+            <span id="sideEffectScore">-</span>
+        </li>
+        <li class="list-group-item">
+            Toxicity Index:
+            <span id="toxicityIndex">-</span>
+        </li>
+        <li class="list-group-item">
+            Interaction Count:
+            <span id="interactionCount">-</span>
+        </li>
+        <li class="list-group-item">
+            Graph Degree Centrality:
+            <span id="graphDegree">-</span>
+        </li>
+        <li class="list-group-item">
+            Graph Clustering Coefficient:
+            <span id="graphClustering">-</span>
+        </li>
+    </ul>
+</div>
+
 
                     <!-- Other Candidates -->
                     <div class="mt-4">

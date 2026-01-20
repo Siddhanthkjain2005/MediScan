@@ -1,53 +1,53 @@
-medicine_name,ingredients,label
-Phenacetin,Phenacetin,banned
-Practolol,Practolol,banned
-Nialamide,Nialamide,banned
-Rofecoxib,Rofecoxib,banned
-Valdecoxib,Valdecoxib,banned
-Analgin,Metamizole,banned
-Cisapride,Cisapride,banned
-Sibutramine,Sibutramine,banned
-Thalidomide Combo,Thalidomide combinations,banned
-Vitamin Analgesic,Vitamins + Analgesics,banned
-Penicillin Sulpha,Penicillin + Sulphonamides,banned
-Tetracycline VitC,Tetracycline + Vitamin C,banned
-Chloramphenicol Combo,Chloramphenicol combinations,banned
-Ergot Prep,Crude ergot alkaloids,banned
-Iron Strychnine,Iron + Strychnine,banned
-Yohimbine Combo,Yohimbine + Strychnine,banned
-Codeine Cold,Codeine + Antihistamines,banned
-Antihistamine Diarrheal,Antihistamine + Antidiarrheal,banned
-Vitamin TB,Vitamins + Anti-TB drugs,banned
-Etodolac Para,Etodolac + Paracetamol,banned
-Cetirizine PE,Cetirizine + Phenylephrine,banned
-Levocetirizine PE,Levocetirizine + Phenylephrine,banned
-Naphazoline Combo,Naphazoline + CPM,banned
-Gamma BHC Benzocaine,Lindane + Benzocaine,banned
-Clindamycin Zinc,Clindamycin + Zinc,banned
-Glucosamine Combo,Glucosamine + Diacerein,banned
-Paracetamol,Paracetamol,safe
-Ibuprofen,Ibuprofen,safe
-Aspirin,Acetylsalicylic acid,safe
-Amoxicillin,Amoxicillin,safe
-Azithromycin,Azithromycin,safe
-Ceftriaxone,Ceftriaxone,safe
-Metformin,Metformin,safe
-Insulin Human,Human insulin,safe
-Atorvastatin,Atorvastatin,safe
-Amlodipine,Amlodipine,safe
-Losartan,Losartan,safe
-Levothyroxine,Levothyroxine,safe
-Clopidogrel,Clopidogrel,safe
-Warfarin,Warfarin,safe
-Furosemide,Furosemide,safe
-Spironolactone,Spironolactone,safe
-Hydrochlorothiazide,Hydrochlorothiazide,safe
-Propranolol,Propranolol,safe
-Sertraline,Sertraline,safe
-Fluoxetine,Fluoxetine,safe
-Omeprazole,Omeprazole,safe
-Pantoprazole,Pantoprazole,safe
-Salbutamol,Salbutamol,safe
-Budesonide,Budesonide,safe
-Nitrofurantoin,Nitrofurantoin,safe
-Ciprofloxacin,Ciprofloxacin,safe
+medicine_name,ingredients,label,avg_daily_dosage_mg,side_effect_score,toxicity_index,interaction_count,graph_degree_centrality,graph_clustering_coeff
+Phenacetin,Phenacetin,banned,1504.56,95.38,0.9519000000000000,9,0.8838,0.05380000000000000
+Practolol,Practolol,banned,1580.52,100.0,0.98355,10,0.9471,0.11710000000000000
+Nialamide,Nialamide,banned,1502.16,95.18,0.9509000000000000,9,0.8818,0.05180000000000010
+Rofecoxib,Rofecoxib,banned,1562.04,100.0,0.9758500000000000,10,0.9317,0.10170000000000000
+Valdecoxib,Valdecoxib,banned,1596.84,100.0,0.9903500000000000,10,0.9607,0.13070000000000000
+Analgin,Metamizole,banned,1527.6,97.3,0.9615,9,0.903,0.07300000000000010
+Cisapride,Cisapride,banned,1558.8,99.9,0.9745,9,0.929,0.09900000000000010
+Sibutramine,Sibutramine,banned,1540.8,98.4,0.9670000000000000,9,0.914,0.08400000000000010
+Thalidomide Combo,Thalidomide combinations,banned,1558.8,99.9,0.9745,9,0.929,0.09900000000000010
+Vitamin Analgesic,Vitamins + Analgesics,banned,1575.0,100.0,0.9812500000000000,10,0.9425,0.11250000000000000
+Penicillin Sulpha,Penicillin + Sulphonamides,banned,1512.6,96.05,0.95525,9,0.8905,0.06050000000000010
+Tetracycline VitC,Tetracycline + Vitamin C,banned,1517.4,96.45,0.95725,9,0.8945,0.06450000000000000
+Chloramphenicol Combo,Chloramphenicol combinations,banned,1539.96,98.33,0.9666500000000000,9,0.9133,0.08330000000000000
+Ergot Prep,Crude ergot alkaloids,banned,1610.16,100.0,0.9959000000000000,10,0.9718,0.14180000000000000
+Iron Strychnine,Iron + Strychnine,banned,1581.96,100.0,0.9841500000000000,10,0.9483,0.11830000000000000
+Yohimbine Combo,Yohimbine + Strychnine,banned,1563.84,100.0,0.9766,10,0.9332,0.10320000000000000
+Codeine Cold,Codeine + Antihistamines,banned,1600.08,100.0,0.9917,10,0.9634,0.13340000000000000
+Antihistamine Diarrheal,Antihistamine + Antidiarrheal,banned,1588.08,100.0,0.9867,10,0.9534,0.12340000000000000
+Vitamin TB,Vitamins + Anti-TB drugs,banned,1587.6,100.0,0.9865,10,0.953,0.12300000000000000
+Etodolac Para,Etodolac + Paracetamol,banned,1582.08,100.0,0.9842000000000000,10,0.9484,0.11840000000000000
+Cetirizine PE,Cetirizine + Phenylephrine,banned,1578.36,100.0,0.98265,10,0.9453,0.11530000000000000
+Levocetirizine PE,Levocetirizine + Phenylephrine,banned,1507.32,95.61,0.9530500000000000,9,0.8861,0.056100000000000000
+Naphazoline Combo,Naphazoline + CPM,banned,1572.0,100.0,0.9800000000000000,10,0.94,0.11000000000000000
+Gamma BHC Benzocaine,Lindane + Benzocaine,banned,1551.36,99.28,0.9714,9,0.9228000000000000,0.09280000000000010
+Clindamycin Zinc,Clindamycin + Zinc,banned,1532.04,97.67,0.96335,9,0.9067000000000000,0.07670000000000010
+Glucosamine Combo,Glucosamine + Diacerein,banned,1500.6,95.05,0.95025,9,0.8805,0.050500000000000000
+Paracetamol,Paracetamol,safe,357.0,9.75,0.07375000000000000,1,0.1275,0.7975
+Ibuprofen,Ibuprofen,safe,346.32,8.86,0.0693,1,0.11860000000000000,0.7886
+Aspirin,Acetylsalicylic acid,safe,360.24,10.02,0.0751,2,0.1302,0.8002
+Amoxicillin,Amoxicillin,safe,321.0,6.75,0.058750000000000000,1,0.0975,0.7675
+Azithromycin,Azithromycin,safe,369.72,10.810000000000000,0.07905000000000000,2,0.1381,0.8081
+Ceftriaxone,Ceftriaxone,safe,345.72,8.81,0.06905,1,0.11810000000000000,0.7881
+Metformin,Metformin,safe,308.88,5.74,0.053700000000000000,1,0.0874,0.7574
+Insulin Human,Human insulin,safe,384.0,12.0,0.08500000000000000,2,0.15,0.82
+Atorvastatin,Atorvastatin,safe,306.12,5.51,0.05255,1,0.08510000000000000,0.7551
+Amlodipine,Amlodipine,safe,360.72,10.06,0.0753,2,0.1306,0.8006
+Losartan,Losartan,safe,403.68,13.64,0.0932,2,0.1664,0.8364
+Levothyroxine,Levothyroxine,safe,329.16,7.43,0.062150000000000000,1,0.1043,0.7743
+Clopidogrel,Clopidogrel,safe,319.08,6.59,0.05795,1,0.0959,0.7659
+Warfarin,Warfarin,safe,329.04,7.42,0.0621,1,0.1042,0.7742
+Furosemide,Furosemide,safe,387.6,12.3,0.0865,2,0.153,0.823
+Spironolactone,Spironolactone,safe,321.6,6.8,0.059000000000000000,1,0.098,0.768
+Hydrochlorothiazide,Hydrochlorothiazide,safe,301.44,5.12,0.050600000000000000,1,0.08120000000000000,0.7512
+Propranolol,Propranolol,safe,382.08000000000000,11.84,0.0842,2,0.1484,0.8184
+Sertraline,Sertraline,safe,405.84000000000000,13.82,0.0941,2,0.16820000000000000,0.8382000000000000
+Fluoxetine,Fluoxetine,safe,343.8,8.65,0.06825,1,0.11650000000000000,0.7865
+Omeprazole,Omeprazole,safe,306.84,5.57,0.05285,1,0.0857,0.7557
+Pantoprazole,Pantoprazole,safe,374.76,11.23,0.08115,2,0.1423,0.8123
+Salbutamol,Salbutamol,safe,369.12,10.76,0.07880000000000000,2,0.1376,0.8076
+Budesonide,Budesonide,safe,329.76,7.48,0.062400000000000000,1,0.1048,0.7748
+Nitrofurantoin,Nitrofurantoin,safe,355.92,9.66,0.0733,1,0.1266,0.7966
+Ciprofloxacin,Ciprofloxacin,safe,392.16000000000000,12.68,0.0884,2,0.1568,0.8268
